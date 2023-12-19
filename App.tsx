@@ -6,23 +6,21 @@
  */
 
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
-import ColorBox from './src/components/ColorBoxes/ColorBox';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Home, News, Profile} from './src/screens';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, alignItems: 'center', padding: 24}}>
-        <Text style={{fontSize: 16, fontWeight: 'bold', paddingBottom: 16}}>
-          Here are some boxes for you
-        </Text>
-        <View style={{flex: 1}}>
-          {['aqua', 'blue', 'yellow', 'red'].map((color, index) => (
-            <ColorBox color={color} key={color + index} />
-          ))}
-        </View>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen component={Home} name="Home" />
+        <Stack.Screen component={News} name="News" />
+        <Stack.Screen component={Profile} name="Profile" />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
